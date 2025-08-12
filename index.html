@@ -33,6 +33,7 @@
         }
     </script>
     <style>
+         html { scroll-behavior: smooth; }
         .code-block {
             background: #1e293b;
             color: #e2e8f0;
@@ -67,6 +68,12 @@
                         FLAVORISE
                     </a>
                 </div>
+                <a 
+                    href="https://github.com/lazamedia/flavorise" class="px-5 block md:hidden py-1 rounded border border-slate-800 bg-slate-900 text-white"
+                    target="_blank"
+                    >
+                    <i class="fab fa-github mr-1"></i> Github
+                </a>
                 <nav class="hidden md:flex space-x-8 content-center items-center">
                     <!-- <a href="#overview" class="text-gray-700 hover:text-primary-600">Overview</a> -->
                     <a href="#installation" class="text-gray-700 hover:text-primary-600">Instalasi</a>
@@ -184,7 +191,7 @@
                             </p>
                             
                             <div class="grid md:grid-cols-2 gap-6 mb-8">
-                                <div class="bg-blue-50 p-6 rounded-lg">
+                                <div class="bg-red-50 p-6 rounded-lg">
                                     <h3 class="font-semibold text-blue-900 mb-3">Tujuan Sistem</h3>
                                     <ul class="space-y-2 text-blue-800">
 
@@ -429,17 +436,17 @@ Password: password123
                                 <h3 class="text-xl font-semibold text-gray-900 mb-4">Flow Sistem</h3>
                                 <div class="bg-gray-50 p-6 rounded-lg">
                                     <div class="flex flex-wrap items-center justify-center space-x-4 text-sm">
-                                        <div class="bg-blue-100 px-3 py-2 rounded">Login</div>
+                                        <div class="my-2 bg-blue-100 px-3 py-2 rounded">Login</div>
                                         <span>→</span>
-                                        <div class="bg-green-100 px-3 py-2 rounded">Buka Shift</div>
+                                        <div class="my-2 bg-green-100 px-3 py-2 rounded">Buka Shift</div>
                                         <span>→</span>
-                                        <div class="bg-yellow-100 px-3 py-2 rounded">POS Interface</div>
+                                        <div class="my-2 bg-yellow-100 px-3 py-2 rounded">POS Interface</div>
                                         <span>→</span>
-                                        <div class="bg-purple-100 px-3 py-2 rounded">Checkout</div>
+                                        <div class="my-2 bg-purple-100 px-3 py-2 rounded">Checkout</div>
                                         <span>→</span>
-                                        <div class="bg-red-100 px-3 py-2 rounded">Print Receipt</div>
+                                        <div class="my-2 bg-red-100 px-3 py-2 rounded">Print Receipt</div>
                                         <span>→</span>
-                                        <div class="bg-gray-100 px-3 py-2 rounded">Close Shift</div>
+                                        <div class="my-2 bg-gray-100 px-3 py-2 rounded">Close Shift</div>
                                     </div>
                                 </div>
                             </div>
@@ -1562,6 +1569,52 @@ php artisan queue:work --verbose
             </main>
         </div>
     </div>
+
+    <!-- Back to Top Button -->
+    <button
+        id="backToTop"
+        aria-label="Kembali ke atas"
+        title="Kembali ke atas"
+        class="hidden fixed bottom-6 right-6 z-50 p-3 rounded-full bg-red-600 text-white shadow-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-300 transform transition duration-200"
+    >
+        <!-- Icon panah atas (SVG) -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
+
+    <script>
+        (function () {
+        const btn = document.getElementById('backToTop');
+        const showAfter = 300; // tampilkan setelah scroll 300px — ubah sesuai kebutuhan
+
+        // Tampilkan/sembunyikan tombol saat scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > showAfter) {
+            btn.classList.remove('hidden');
+            // opsional: animasi masuk
+            btn.classList.add('opacity-100', 'translate-y-0');
+            } else {
+            btn.classList.add('hidden');
+            btn.classList.remove('opacity-100', 'translate-y-0');
+            }
+        });
+
+        // Klik -> smooth scroll ke atas
+        btn.addEventListener('click', (e) => {
+            // gunakan prefer-reduced-motion untuk aksesibilitas
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReduced) {
+            window.scrollTo(0, 0);
+            } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+
+        // keyboard: beri fokusable behaviour (sudah tombol), tapi bisa tambahkan keybinding ESC misal
+        })();
+    </script>
+    <!-- End Back to Top Button -->
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8">
